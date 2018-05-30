@@ -1,4 +1,4 @@
-# browserplay
+# hashfiddle
 
 lightweight JS/HTML/CSS fiddling
 
