@@ -128,7 +128,8 @@
         function maybe_decompress( o, a, b )
         {
             var tmp;
-            return (tmp = o[ a ])  &&  tmp
+            return !o  ?  ''  :
+                (tmp = o[ a ])  &&  tmp
                 || (tmp = o[ b ])  &&  decompress( o[ b ] )
                 ||  ''
             ;
