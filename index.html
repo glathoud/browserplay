@@ -2,35 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>browserplay</title>
+    <title>Hashfiddle</title>
     <style type="text/css">
-      .browserplay section { border: solid 1px black; padding: 1em; margin: 0.2em; background-color: lightgrey; }
-      .browserplay section.half { width: calc(50% - 3em); }
-      .browserplay .left { float: left; }
-      .browserplay .right { float: right; }
-      .browserplay .clear { clear: left; }
-      .browserplay textarea { width: 100%; min-height: 300px; }
-      .browserplay #tajscompil { min-width: 66%; }
-      .browserplay #tajscompil.error { color: darkred; }
-      .browserplay .bptabcont { display: flex; flex-wrap: wrap; }
-      .browserplay .bptabcont>div { display: none; order: 1; }
-      .browserplay .bptabcont>h2 { border: 0; margin: 0.35em 0 0.6em 0; padding: 0; }
-      .browserplay .bptabcont>h2 label {
+      .hafi section { border: solid 1px black; padding: 1em; margin: 0.2em; background-color: lightgrey; }
+      .hafi section.half { width: calc(50% - 3em); }
+      .hafi .left { float: left; }
+      .hafi .right { float: right; }
+      .hafi .clear { clear: left; }
+      .hafi textarea { width: 100%; min-height: 300px; }
+      .hafi #tajscompil { min-width: 66%; }
+      .hafi #tajscompil.error { color: darkred; }
+      .hafi .bptabcont { display: flex; flex-wrap: wrap; }
+      .hafi .bptabcont>div { display: none; order: 1; }
+      .hafi .bptabcont>h2 { border: 0; margin: 0.35em 0 0.6em 0; padding: 0; }
+      .hafi .bptabcont>h2 label {
       display: inline-block;
       margin-right: 1.5em;
       cursor: pointer;
       font-size: 80%;
       font-weight: normal;
       }
-      .browserplay .bptabcont>h2 label:hover { color: darkgrey; text-decoration: underline; }
-      .browserplay .bptabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
-      .browserplay .bptabcont>input[type="radio"]:checked+h2 label { text-decoration: underline; }
-      .browserplay .bptabcont>input[type="radio"]:checked+h2+div { display: block; width: 100%; }
+      .hafi .bptabcont>h2 label:hover { color: darkgrey; text-decoration: underline; }
+      .hafi .bptabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
+      .hafi .bptabcont>input[type="radio"]:checked+h2 label { text-decoration: underline; }
+      .hafi .bptabcont>input[type="radio"]:checked+h2+div { display: block; width: 100%; }
     </style>
   </head>
   <body>
 
-    <h1>browserplay</h1>
+    <h1>Hashfiddle</h1>
 
     <aside style="float: right">by <a href="http://glat.info">G. Lathoud</a>, May 2018.</aside>
 
@@ -48,7 +48,7 @@
 
     <hr/>
 
-    <div class="browserplay">
+    <div class="hafi">
     
       <section class="half right">
         <div class="bptabcont">
@@ -62,7 +62,7 @@
       </section>
 
       <section class="half left">
-        <p>js (F5 to run) <input type="text" id="tajscompil" class="right" readonly="readonly"></input></p>
+        <p>js (press F5 or <button onclick="location.reload()">this</button> to run) <input type="text" id="tajscompil" class="right" readonly="readonly"></input></p>
         <textarea id="tajs"></textarea>
       </section>
 
