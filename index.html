@@ -121,12 +121,18 @@
         
         var h = (location.hash.match( /[#&]o=([^&]+)/ )  ||  [])[ 1 ]
         , o = h  &&  JSON.parse( map_swap( decodeURIComponent( h ) ) )
-        , html  = o  &&  o.html  ||  ''
-        , css   = o  &&  o.css   ||  ''
-        , o_js  = o  &&  o.js
-        , o_jc  = o  &&  o.jc
-        , js    = o_js  ?  o_js  :  o_jc  ?  decompress( o_jc )  :  ''
+        , html  = maybe_decompress( o, 'html', 'hc' )
+        , css   = maybe_decompress( o, 'css', 'cc' )
+        , js    = maybe_decompress( o, 'js', 'jc' )
         ;
+        function maybe_decompress( o, a, b )
+        {
+            var tmp;
+            return (tmp = o[ a ])  &&  tmp
+                || (tmp = o[ b ])  &&  decompress( o[ b ] )
+                ||  ''
+            ;
+        }
         tahtml.value = html;
         tacss.value = css;
         tajs.value = js;
@@ -181,15 +187,20 @@
                 _last_js_hash   = js;
                 _last_html_hash = html;
                 _last_css_hash  = css;
-                
-                var jc = compress( js )
-                ,   o  = { html : html, css : css }
-                ;
-                if (jc.length < js.length)
-                    o.jc = jc;
-                else
-                    o.js = js;
-                
+
+                var o = {};
+                maybe_compress( o, 'js', 'jc', js );
+                maybe_compress( o, 'html', 'hc', html );
+                maybe_compress( o, 'css', 'cc', css );
+                function maybe_compress( o, a, b, data )
+                {
+                    var dc = compress( data );
+                    if (dc.length < data.length)
+                        o[ b ] = dc;
+                    else
+                        o[ a ] = data;
+                }
+                                
                 var json = JSON.stringify( o )
                 ,  new_h = '#o=' + encodeURIComponent( map_swap( json ) )
                 ;
