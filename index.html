@@ -16,6 +16,7 @@
       .hafi .right { float: right; }
       .hafi .clear { clear: both; }
       }
+      .hafi .top-right { position: fixed; top: 0; right: 0; margin: 0; padding: 0.5em; background-color: white; opacity: 0.9; border-radius: 0 0 0 0.33em; }
       .hafi textarea { width: 100%; min-height: 300px; }
       .hafi button { cursor: pointer; }
       .hafi #tajscompil { min-width: 58%; }
@@ -40,11 +41,19 @@
 
     <h1>Hashfiddle</h1>
 
+    <div class="hafi">
+      <div class="top-right">
+        [<a href="#" onclick="document.body.firstElementChild.scrollIntoView();return false">top</a>]
+        &ensp;[<a href="#" onclick="hafi_edit.scrollIntoView();return false">edit</a>]
+        &ensp;[<a href="#" onclick="location.href='?'+Date.now()+'#o=9Y';return false">clear</a>]
+      </div>
+    </div>
+    
     <script type="text/javascript">
       function show_fun() {
       location.href="?" + Date.now() + "#o=9\x22html\x226\x22\x22Q\x22css\x226\x22\x22Q\x22js\x226\x22varKhKJK'WspanKstyleJ%5C\x22border6KsolidK1pxKblackZKpadding6K2pxZKdisplay6Kinline-blockZ%5C\x22!'KHKtahtml.valueKHK'WXspan!'Z%5Cntahtml.valueKJK'8'HhH'Q'HhH'5'Z\x22Y";
     }</script>
-    <section>A minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" onclick="show_fun()">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</section>
+    <section>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" onclick="show_fun()">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</section>
 
     
     <hr style="clear: both;"/>
@@ -55,16 +64,10 @@
     <hr style="clear: both;"/>
     <div id="outcont"></div>
 
-    <div class="hafi">
+    <div class="hafi" id="hafi_edit">
     
       <section class="half right">
-
-
-
         <div class="hftabcont">
-
-
-          
           <input class="hfhc" id="hfhtml" type="radio" name="hfhc" autocomplete="off" checked="checked"/>
           <h2><label for="hfhtml">html</label></h2>
           <div><textarea id="tahtml"></textarea></div>
@@ -75,10 +78,8 @@
           <h2><label for="hfstate">state</label></h2>
           <div><textarea id="tastate"></textarea></div>
 
-          <span class="small" style="margin-left: 40%">Example: <a href="#o=9%22jc%226%22spanQpaddingQdisplayQtmpQreplaceQborderQinlineQQstateHHZ%5Cn%5CnvarKhKJK'8W~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!QW~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!5'%5CnQKK~QKJKh%5CnZ%5CnforK(varKnKJKstateZKn--ZK)%5CnKK~QKJKh.~X(KX%23XgQK~QK)Z%5Cn%5Cn~QKJK~Q.~X(X%23XgQ'')Z%5Cnoutcont.inner%2BTMLKJK~QZ%5Cn%22Q%22state%226%220%22Y" onclick="location.href='?'+Math.random()+this.getAttribute('href')">use state</a>.</span>
-
+          <span class="small" style="margin-left: 40%">Example: <a href="#o=9%22jc%226%22spanQpaddingQdisplayQtmpQreplaceQborderQinlineQQstateHHZ%5Cn%5CnvarKhKJK'8W~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!QW~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!5'%5CnQKK~QKJKh%5CnZ%5CnforK(varKnKJKstateZKn--ZK)%5CnKK~QKJKh.~X(KX%23XgQK~QK)Z%5Cn%5Cn~QKJK~Q.~X(X%23XgQ'')Z%5Cnoutcont.inner%2BTMLKJK~QZ%5Cn%22Q%22state%226%220%22Y" onclick="location.href='?'+Date.now()+this.getAttribute('href')">use state</a>.</span>
         </div>
-
       </section>
 
       <section class="half left">
