@@ -17,24 +17,23 @@
       .hafi .clear { clear: both; }
       }
       .hafi .top-right { position: fixed; top: 0; right: 0; margin: 0; padding: 0.5em; background-color: white; opacity: 0.9; border-radius: 0 0 0 0.33em; }
+      .hafi .lglh { height: 1.4em; }
       .hafi textarea { width: 100%; min-height: 300px; }
       .hafi button { cursor: pointer; }
       .hafi #tajscompil { min-width: 58%; }
       .hafi #tajscompil.error { color: darkred; }
       .hafi .hftabcont { display: flex; flex-wrap: wrap; }
       .hafi .hftabcont>div { display: none; order: 1; }
-      .hafi .hftabcont>h2 { border: 0; margin: 0.35em 0 0.6em 0; padding: 0; }
-      .hafi .hftabcont>h2 label {
+      .hafi .hftabcont>p label {
       display: inline-block;
-      margin-right: 1.5em;
+      margin-right: 1em;
       cursor: pointer;
-      font-size: 80%;
-      font-weight: normal;
+      font-size: larger;
       }
-      .hafi .hftabcont>h2 label:hover { color: darkgrey; text-decoration: underline; }
+      .hafi .hftabcont>p label:hover { color: darkgrey; text-decoration: underline; }
       .hafi .hftabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
-      .hafi .hftabcont>input[type="radio"]:checked+h2 label { text-decoration: underline; font-weight: bold; }
-      .hafi .hftabcont>input[type="radio"]:checked+h2+div { display: block; width: 100%; }
+      .hafi .hftabcont>input[type="radio"]:checked+p label { text-decoration: underline; font-weight: bold; }
+      .hafi .hftabcont>input[type="radio"]:checked+p+div { display: block; width: 100%; }
     </style>
   </head>
   <body>
@@ -71,13 +70,13 @@
         <section class="half right">
           <div class="hftabcont">
             <input class="hfhc" id="hfhtml" type="radio" name="hfhc" autocomplete="off" checked="checked"/>
-            <h2><label for="hfhtml">html</label></h2>
+            <p class="lglh"><label for="hfhtml">html</label></p>
             <div><textarea id="tahtml"></textarea></div>
             <input class="hfhc" id="hfcss" type="radio" name="hfhc" autocomplete="off"/>
-            <h2><label for="hfcss">css</label></h2>
+            <p><label for="hfcss">css</label></p>
             <div><textarea id="tacss"></textarea></div>
             <input class="hfhc" id="hfstate" type="radio" name="hfhc" autocomplete="off"/>
-            <h2><label for="hfstate">state</label></h2>
+            <p><label for="hfstate">state</label></p>
             <div><textarea id="tastate"></textarea></div>
 
             <script type="text/javascript">
@@ -96,7 +95,7 @@
         </section>
 
         <section class="half left">
-          <p>js (press F5 or <button onclick="location.reload()">this</button> to run) <input type="text" id="tajscompil" class="right" readonly="readonly"></input></p>
+          <p class="lglh">js (press F5 or <button class="in-text" onclick="location.reload()">this</button> to run) <input type="text" id="tajscompil" class="in-text right" readonly="readonly"></input></p>
           <textarea id="tajs"></textarea>
         </section>
 
