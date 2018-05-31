@@ -10,6 +10,7 @@
       }
       .hafi section { border: solid 1px black; padding: 1em; margin: 0.2em; background-color: lightgrey; }
       @media screen and (min-width: 1000px) {
+      .hafi .small { font-size: small; }
       .hafi section.half { width: calc(50% - 3em); }
       .hafi .left { float: left; }
       .hafi .right { float: right; }
@@ -52,13 +53,20 @@
 
     <style type="text/css" id="csscont"></style>
     <div id="htmlcont"></div>
-
+    <hr/>
+    <div id="outcont"></div>
     <hr/>
 
     <div class="hafi">
     
       <section class="half right">
+
+
+
         <div class="hftabcont">
+
+
+          
           <input class="hfhc" id="hfhtml" type="radio" name="hfhc" autocomplete="off" checked="checked"/>
           <h2><label for="hfhtml">html</label></h2>
           <div><textarea id="tahtml"></textarea></div>
@@ -68,7 +76,11 @@
           <input class="hfhc" id="hfstate" type="radio" name="hfhc" autocomplete="off"/>
           <h2><label for="hfstate">state</label></h2>
           <div><textarea id="tastate"></textarea></div>
+
+          <span class="small" style="margin-left: 40%">Example: <a href="#o=9%22jc%226%22spanQpaddingQdisplayQtmpQreplaceQborderQinlineQQstateHHZ%5Cn%5CnvarKhKJK'8W~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!QW~KKstyleJ%5C%22~Y6KsolidK1pxKblackZK~Z6K2pxZK~J6K~H-blockZ%5C%22!%23WX~K!5'%5CnQKK~QKJKh%5CnZ%5CnforK(varKnKJKstateZKn--ZK)%5CnKK~QKJKh.~X(KX%23XgQK~QK)Z%5Cn%5Cn~QKJK~Q.~X(X%23XgQ'')Z%5Cnoutcont.inner%2BTMLKJK~QZ%5Cn%22Q%22state%226%220%22Y" onclick="location.href='?'+Math.random()+this.getAttribute('href')">use state</a>.</span>
+
         </div>
+
       </section>
 
       <section class="half left">
