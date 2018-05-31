@@ -19,27 +19,27 @@
       .hafi button { cursor: pointer; }
       .hafi #tajscompil { min-width: 58%; }
       .hafi #tajscompil.error { color: darkred; }
-      .hafi .bptabcont { display: flex; flex-wrap: wrap; }
-      .hafi .bptabcont>div { display: none; order: 1; }
-      .hafi .bptabcont>h2 { border: 0; margin: 0.35em 0 0.6em 0; padding: 0; }
-      .hafi .bptabcont>h2 label {
+      .hafi .hftabcont { display: flex; flex-wrap: wrap; }
+      .hafi .hftabcont>div { display: none; order: 1; }
+      .hafi .hftabcont>h2 { border: 0; margin: 0.35em 0 0.6em 0; padding: 0; }
+      .hafi .hftabcont>h2 label {
       display: inline-block;
       margin-right: 1.5em;
       cursor: pointer;
       font-size: 80%;
       font-weight: normal;
       }
-      .hafi .bptabcont>h2 label:hover { color: darkgrey; text-decoration: underline; }
-      .hafi .bptabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
-      .hafi .bptabcont>input[type="radio"]:checked+h2 label { text-decoration: underline; }
-      .hafi .bptabcont>input[type="radio"]:checked+h2+div { display: block; width: 100%; }
+      .hafi .hftabcont>h2 label:hover { color: darkgrey; text-decoration: underline; }
+      .hafi .hftabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
+      .hafi .hftabcont>input[type="radio"]:checked+h2 label { text-decoration: underline; }
+      .hafi .hftabcont>input[type="radio"]:checked+h2+div { display: block; width: 100%; }
     </style>
   </head>
   <body>
 
     <h1>Hashfiddle</h1>
 
-    <aside style="float: right">by <a href="http://glat.info">G. Lathoud</a>, May 2018.</aside>
+    <aside style="float: right">by <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</aside>
 
     <script type="text/javascript">
       function show_fun() {
@@ -58,13 +58,16 @@
     <div class="hafi">
     
       <section class="half right">
-        <div class="bptabcont">
-          <input class="bphc" id="bphtml" type="radio" name="bphc" autocomplete="off" checked="checked"/>
-          <h2><label for="bphtml">html</label></h2>
+        <div class="hftabcont">
+          <input class="hfhc" id="hfhtml" type="radio" name="hfhc" autocomplete="off" checked="checked"/>
+          <h2><label for="hfhtml">html</label></h2>
           <div><textarea id="tahtml"></textarea></div>
-          <input class="bphc" id="bpcss" type="radio" name="bphc" autocomplete="off"/>
-          <h2><label for="bpcss">css</label></h2>
+          <input class="hfhc" id="hfcss" type="radio" name="hfhc" autocomplete="off"/>
+          <h2><label for="hfcss">css</label></h2>
           <div><textarea id="tacss"></textarea></div>
+          <input class="hfhc" id="hfstate" type="radio" name="hfhc" autocomplete="off"/>
+          <h2><label for="hfstate">state</label></h2>
+          <div><textarea id="tastate"></textarea></div>
         </div>
       </section>
 
@@ -114,6 +117,7 @@
         var w = window
         ,   tahtml      = w.tahtml
         ,   tacss       = w.tacss
+        ,   tastate     = w.tastate
         ,   tajs        = w.tajs
         ,   tajscompil  = w.tajscompil
         ,   htmlcont    = w.htmlcont
@@ -132,6 +136,7 @@
         , o = h  &&  JSON.parse( map_swap( decodeURIComponent( h ) ) )
         , html  = maybe_decompress( o, 'html', 'hc' )
         , css   = maybe_decompress( o, 'css', 'cc' )
+        , state = maybe_decompress( o, 'state', 'sc' )
         , js    = maybe_decompress( o, 'js', 'jc' )
         ;
         function maybe_decompress( o, a, b )
@@ -145,9 +150,31 @@
         }
         tahtml.value = html;
         tacss.value = css;
+        tastate.value = state;
         tajs.value = js;
         htmlcont.innerHTML = html;
 
+        // UX: show the first non-empty tab
+        if (!html)
+        {
+            if (css)
+                w.hfcss.checked=true;
+
+            else if (state)
+                w.hfstate.checked=true;
+        }
+
+        
+        // issue#1: try to support script tags (simply copying the
+        // tags' HTML does not seem to do much).  Reload needed on
+        // modifications (e.g. F5).
+
+        var tmp = document.createElement( 'div' );
+        tmp.innerHTML = html;
+        tmp.querySelectorAll( 'script' ).forEach( function (s) {
+            document.write( s.outerHTML );
+        } );
+        
         // Write
 
         setInterval( update_html, 250 );
@@ -162,7 +189,10 @@
 
         // Run
 
-        document.write( '\x3Cscript type="text/javascript"\x3E' + js + '\x3C/script\x3E' );
+        update_html();
+        update_css();
+        
+        document.write( '\x3Cscript type="text/javascript"\x3E' + js_with_state( js, state ) + '\x3C/script\x3E' );
 
         // --- Details
 
@@ -181,34 +211,41 @@
             if (_last_css !== css)
                 csscont.innerHTML = _last_css = css;
         }
-
+        
         var _last_js_hash
         ,   _last_html_hash
         ,   _last_css_hash
+        ,   _last_state_hash
         ;
         function update_hash()
         {
-            var js = tajs  .value
-            , html = tahtml.value
-            ,  css = tacss .value
+            var  js = tajs  .value
+            ,  html = tahtml.value
+            ,   css = tacss .value
+            , state = tastate.value
             ;
-            if (_last_js_hash !== js  ||  _last_html_hash !== html  ||  _last_css_hash !== css)
+            if (_last_js_hash !== js  ||  _last_html_hash !== html  ||  _last_css_hash !== css  ||  _last_state_hash !== state)
             {
-                _last_js_hash   = js;
-                _last_html_hash = html;
-                _last_css_hash  = css;
+                _last_js_hash    = js;
+                _last_html_hash  = html;
+                _last_css_hash   = css;
+                _last_state_hash = state;
 
                 var o = {};
                 maybe_compress( o, 'js', 'jc', js );
                 maybe_compress( o, 'html', 'hc', html );
                 maybe_compress( o, 'css', 'cc', css );
+                maybe_compress( o, 'state', 'sc', state );
                 function maybe_compress( o, a, b, data )
                 {
-                    var dc = compress( data );
-                    if (dc.length < data.length)
-                        o[ b ] = dc;
-                    else
-                        o[ a ] = data;
+                    if (data.length)
+                    {
+                        var dc = compress( data );
+                        if (dc.length < data.length)
+                            o[ b ] = dc;
+                        else
+                            o[ a ] = data;
+                    }
                 }
                                 
                 var json = JSON.stringify( o )
@@ -222,7 +259,10 @@
         var _last_js_compiled;
         function update_jscompil()
         {
-            var js = tajs.value;
+            var state = tastate.value
+            ,    js_0 = tajs.value
+            ,    js   = js_with_state( js_0, state )
+            ;
             if (_last_js_compiled !== js)
             {
                 _last_js_compiled = js;
@@ -238,6 +278,14 @@
                     tajscompil.value = 'Caught error:\n' + e + '\n';
                 }
             }
+        }
+        
+        function js_with_state( js, state )
+        {
+            return 'var state = (' + (state  ||  'null') + ');'
+                + '\n' + js
+                + '\ntastate.value = state == null  ?  ""  :  JSON.stringify( state );'
+            ;
         }
 
         // --- Further details
