@@ -42,19 +42,24 @@
 
       <h1>Hashfiddle</h1>
 
+      <script type="text/javascript">
+        function load_url_hash( h ) {
+        location.href='?'+Date.now().toString(36)+(/^#/.test(h)?'':'#')+h;
+        return false;
+        }
+      </script>
+      
       <div class="top-right">
         [<a href="#" onclick="document.body.firstElementChild.scrollIntoView();return false">top</a>]
         &ensp;[<a href="#" onclick="hafi_edit.scrollIntoView();return false">edit</a>]
-        &ensp;[<a href="#" onclick="location.href='?'+Date.now()+'#o=76';return false">clear</a>]
+        &ensp;[<a href="#" onclick="return load_url_hash('#o=76')">clear</a>]
       </div>
       
       <script type="text/javascript">
-        function show_fun() {
-            location.href="?" + Date.now() + "#o=7ZjsZ5ZvarJhJXJ'qspanJstyleXKZborder5JsolidJ1pxJblackQJpadding5J2pxQJdisplay5Jinline-blockQKZ4'J!Jtahtml.valueJ!J'qYspan4'QKntahtml.valueJXJ'H'!h!'9'!h!'W'QZ6";
-        }
+        var show_fun = load_url_hash.bind( null, "#o=7ZjsZ5ZvarJhJXJ'qspanJstyleXKZborder5JsolidJ1pxJblackQJpadding5J2pxQJdisplay5Jinline-blockQKZ4'J!Jtahtml.valueJ!J'qYspan4'QKntahtml.valueJXJ'H'!h!'9'!h!'W'QZ6" );
       </script>
 
-      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" onclick="show_fun();return false">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
+      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" onclick="return show_fun()">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
       
       <hr style="clear: both;"/>
     </div >
@@ -80,17 +85,13 @@
             <div><textarea id="tastate"></textarea></div>
 
             <script type="text/javascript">
-              function show_example_with_state() {
-              location.href="?" + Date.now() + "#o=7ZjcZ5Zspan9padding9display9tmp9replace9border9inline99state!!QKnKnvarJhJXJ'Hq~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK49q~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK4W'Kn9JJ~QJXJhKnQKnforJ(varJnJXJstateQJn--QJ)KnJJ~QJXJh.~X(JY%23Yg9J~QJ)QKnKn~QJXJ~Q.~X(Y%23Yg9'')QKnoutcont.inner%5BTMLJXJ~QQKnZ9ZstateZ5Z0Z6";
-              }
-              function show_example_gui_toggle() {
-              location.href="?" + Date.now() + "#o=7ZhcZ5Zbutton9toggle99q~KKJonclickXKZdocument.body.classList.~KZ('hafi-hidden')KZ4~KZJhashfiddleJGUIJvisibilityqY~KK4Z9ZccZ5Zhafi9hidden99.~KK-~KZ.~KK9J.~KK-~KZJ.~KKJ7Jdisplay5JnoneQJ6KnZ6";
-              }
-              function show_bug_report() {
-              location.href="?" + Date.now() + "#o=7ZjcZ5ZlayerControl9tileLayer9function9kitten9min\x22oom9TileLayer9layer_129var9placekitten9return9check_zoom9layerGroup9map9new_z9layer_3>9layer_>9layer_39layer_29get\x22oom9layer_19coords9layers9%5Citten99~8J~z9J~KKQKnKnL.~9.~RJXJL.~9.extend(7Kn~1getTileUrl5J~J(~B)J7Kn~5~8JiJXJMath.ceil(JMath.random()J*J>J)QKn~5~8JkJXJ1JqqJ~B.zKn~5~WJKZhttps5YY~H.comYKZJ!JkJ!JKZYKZJ!JkJ!JKZ%3FimageXKZJ!JiQKn~169Kn~1getAttribution5J~J()J7Kn~5~WJKZqaJhrefX'https5YY~H.comYattribution.html'4Place~RqYa4KZKn~16Kn6)QKnKnL.~KZ.~QJXJ~J(JoptJ)J7Kn~1~WJnewJL.~9.~R(Jnull9JoptJ)QKn6KnKnKn~8J~NJXJL.~KZ.~Q(7~X506)QKn~8J~VJXJL.~KZ.~Q(7~X5106)QKn~8J~jJXJL.~KZ.~Q(7~X506)QKn~8J~GJXJL.~KZ.~Q(7~X5106)QKnKn~8J~YJXJL.~q(H~N9~VW)QKn~8J~UJXJL.~q(H~j9~GW)QKnKnYYJstartKnKn~zJXJL.~z('~zid'9J7J~L5JHJ~YWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QKnKn~KKJXJL.control.~L(7125~Y93>5~U6)QKn~KK.addTo(~z)QKnKn~8JzJXJ~z.~F()QKnKn~z.on('baselayerchange'9J~!J)QKnKn~JJ~!()J7Kn~1~8J~-JXJ~z.~F()QKn~1ifJ(zJ%2BXXJ~-)Kn~5alert(J'~zJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~-J)QKn6KnKn~KK.getContainer().classList.add('clickme')Z9ZhcZ5Zleaflet9crossorigin9integrity9sha%3A129script99JqlinkJrelXKZstylesheetKZJhrefXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.cssKZ~1~JXKZ~Q-Rksm%3ARenBE%5CS%5CFjgI3a>1vrjkw>EVPl%203!OiI%7D%3AvTjIdo%2CbrlAacEu%5COi%3B%3AOFh%7BcOI1bkDwL<dLw3\x22g0cR%20AA%3BXXKZJ~KZXKZKZY4KnKnJq~XJsrcXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.jsKZJ~JXKZ~Q-YNsx%2C%3D>%5BebavoBvEBuyp3I%7Bod%3AtA0UzAxs!j%403%5CgC%40PU0kgB>%3Di%5C>Lfe>y>cgBtaR%20%3BEIFC%5D!oC%3A0%7DaPT2L1zwXXKZJ~KZXKZKZ4qY~X4KnKnJqdivJidXKZmapidKZ4qYdiv4Z9ZcssZ5Z%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6KnKn.clickme5beforeJ7Jcontent5JKZclickJmeJ444KZQJfloat5leftQKnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQKn6Z6";
-              }
+              var show_example_with_state = load_url_hash.bind( null, "#o=7ZjcZ5Zspan9padding9display9tmp9replace9border9inline99state!!QKnKnvarJhJXJ'Hq~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK49q~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK4W'Kn9JJ~QJXJhKnQKnforJ(varJnJXJstateQJn--QJ)KnJJ~QJXJh.~X(JY%23Yg9J~QJ)QKnKn~QJXJ~Q.~X(Y%23Yg9'')QKnoutcont.inner%5BTMLJXJ~QQKnZ9ZstateZ5Z0Z6" );
+              
+              var show_example_gui_toggle = load_url_hash.bind( null, "#o=7ZhcZ5Zbutton9toggle99q~KKJonclickXKZdocument.body.classList.~KZ('hafi-hidden')KZ4~KZJhashfiddleJGUIJvisibilityqY~KK4Z9ZccZ5Zhafi9hidden99.~KK-~KZ.~KK9J.~KK-~KZJ.~KKJ7Jdisplay5JnoneQJ6KnZ6" );
+              
+              var show_bug_report = load_url_hash.bind( null, "#o=7ZjcZ5ZlayerControl9tileLayer9function9kitten9min\x22oom9TileLayer9layer_129var9placekitten9return9check_zoom9layerGroup9map9new_z9layer_3>9layer_>9layer_39layer_29get\x22oom9layer_19coords9layers9%5Citten99~8J~z9J~KKQKnKnL.~9.~RJXJL.~9.extend(7Kn~1getTileUrl5J~J(~B)J7Kn~5~8JiJXJMath.ceil(JMath.random()J*J>J)QKn~5~8JkJXJ1JqqJ~B.zKn~5~WJKZhttps5YY~H.comYKZJ!JkJ!JKZYKZJ!JkJ!JKZ%3FimageXKZJ!JiQKn~169Kn~1getAttribution5J~J()J7Kn~5~WJKZqaJhrefX'https5YY~H.comYattribution.html'4Place~RqYa4KZKn~16Kn6)QKnKnL.~KZ.~QJXJ~J(JoptJ)J7Kn~1~WJnewJL.~9.~R(Jnull9JoptJ)QKn6KnKnKn~8J~NJXJL.~KZ.~Q(7~X506)QKn~8J~VJXJL.~KZ.~Q(7~X5106)QKn~8J~jJXJL.~KZ.~Q(7~X506)QKn~8J~GJXJL.~KZ.~Q(7~X5106)QKnKn~8J~YJXJL.~q(H~N9~VW)QKn~8J~UJXJL.~q(H~j9~GW)QKnKnYYJstartKnKn~zJXJL.~z('~zid'9J7J~L5JHJ~YWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QKnKn~KKJXJL.control.~L(7125~Y93>5~U6)QKn~KK.addTo(~z)QKnKn~8JzJXJ~z.~F()QKnKn~z.on('baselayerchange'9J~!J)QKnKn~JJ~!()J7Kn~1~8J~-JXJ~z.~F()QKn~1ifJ(zJ%2BXXJ~-)Kn~5alert(J'~zJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~-J)QKn6KnKn~KK.getContainer().classList.add('clickme')Z9ZhcZ5Zleaflet9crossorigin9integrity9sha%3A129script99JqlinkJrelXKZstylesheetKZJhrefXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.cssKZ~1~JXKZ~Q-Rksm%3ARenBE%5CS%5CFjgI3a>1vrjkw>EVPl%203!OiI%7D%3AvTjIdo%2CbrlAacEu%5COi%3B%3AOFh%7BcOI1bkDwL<dLw3\x22g0cR%20AA%3BXXKZJ~KZXKZKZY4KnKnJq~XJsrcXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.jsKZJ~JXKZ~Q-YNsx%2C%3D>%5BebavoBvEBuyp3I%7Bod%3AtA0UzAxs!j%403%5CgC%40PU0kgB>%3Di%5C>Lfe>y>cgBtaR%20%3BEIFC%5D!oC%3A0%7DaPT2L1zwXXKZJ~KZXKZKZ4qY~X4KnKnJqdivJidXKZmapidKZ4qYdiv4Z9ZcssZ5Z%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6KnKn.clickme5beforeJ7Jcontent5JKZclickJmeJ444KZQJfloat5leftQKnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQKn6Z6" );
             </script>
-            <span class="small" style="display: flex; align-items: center;">Examples:&nbsp;<a href="#" onclick="show_fun();return false">use html</a>,&nbsp;<a href="#" onclick="show_example_with_state();return false">use state</a>,&nbsp;<a href="#" onclick="show_example_gui_toggle();return false">toggle GUI</a>.&emsp;&emsp;&emsp;&emsp;<a href="#" onclick="show_bug_report();return false" style="color: transparent">Leaflet bug</a></span>
+            <span class="small" style="display: flex; align-items: center;">Examples:&nbsp;<a href="#" onclick="return show_fun()">use html</a>,&nbsp;<a href="#" onclick="show_example_with_state();return false">use state</a>,&nbsp;<a href="#" onclick="return show_example_gui_toggle()">toggle GUI</a>.&emsp;&emsp;&emsp;&emsp;<a href="#" onclick="return show_bug_report()" style="color: transparent">Leaflet bug</a></span>
           </div>
         </section>
 
@@ -212,7 +213,7 @@
 
         setInterval( update_css, 250 );
 
-        setInterval( update_hash, 333 );
+        setInterval( update_hash, 250 );
 
         setInterval( update_jscompil, 678 );
         
