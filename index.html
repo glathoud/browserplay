@@ -388,8 +388,20 @@
                 ,    ch = {}
                 ;
                 [].forEach.call(document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
-                                ,function (x) { var id = x.id; if (id) { ch[ id ] = !!x.checked; } }
+                                , store_one
                                );
+
+                function store_one(x)
+                {
+                    var id = x.id;
+                    if (id  &&  x.checked)
+                    {
+                        var ta = document.getElementById("ta"+id.substring(2));
+                        if (ta  &&  !/^\s*$/.test( ta.value ))
+                            ch[ id ] = true;
+                    }
+                }
+                
                 var to_store = { active : id  &&  { id : id, s0 : s0, s1 : s1 } ||  null
                                  , ch : ch
                                };
