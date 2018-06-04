@@ -379,9 +379,12 @@
                 ,    s1 = id  &&  daE.selectionEnd
                 ,    ch = {}
                 ;
-                [].forEach.call(document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
-                                , store_one
-                               );
+                if (id  &&  daE !== tajs)
+                {
+                    [].forEach.call(document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
+                                    , store_one
+                                   );
+                }
 
                 function store_one(x)
                 {
