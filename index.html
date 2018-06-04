@@ -16,7 +16,7 @@
       .hafi .right { float: right; }
       .hafi .clear { clear: both; }
       }
-      .hafi .top-right { position: fixed; top: 0; right: 0; margin: 0; padding: 0.5em; background-color: white; opacity: 0.9; border-radius: 0 0 0 0.33em; }
+      .hafi .top-right { position: fixed; top: 0; right: 0; margin: 0; z-index: 99999; padding: 0.5em; background-color: white; opacity: 0.9; border-radius: 0 0 0 0.33em; }
       .hafi .lglh { height: 1.4em; }
       .hafi textarea { width: 100%; min-height: 300px; }
       .hafi button { cursor: pointer; }
@@ -89,11 +89,6 @@
           <textarea id="tajs"></textarea>
         </section>
 
-        <section class="clear">
-          <p>Myself:</p>
-          <pre><code id="myself_code"></code></pre>
-        </section>
-
       </div>      
     </div>      
 
@@ -106,7 +101,7 @@
 
   setup_example_anchor( ".hafi-a-gui-toggle", "#o=7KhcK5Kbutton9toggle99q~ZKJonclickXZKdocument.body.classList.~ZZ('hafi-hidden')ZK4~ZZJhashfiddleJGUIJvisibilityqY~ZK4K9KccK5Khafi9hidden99.~ZK-~ZZ.~ZK9J.~ZK-~ZZJ.~ZKJ7Jdisplay5JnoneQJ6ZnK6" );
 
-  setup_example_anchor( ".hafi-a-leaflet-bug-report", "#o=7KjcK5KlayerControl9tileLayer9function9kitten9check_zoom9min\oom9TileLayer9baselayerchange9layer_129var9placekitten9map9return9layerGroup9layer_3>9new_z9layer_19layer_29layer_39layer_>9get\oom9\x22itten9coords9layers99~WJ~q9J~ZKQZnZnL.~Y.~LJXJL.~Y.extend(7Zn~1getTileUrl5J~J(~R)J7Zn~5~WJiJXJMath.ceil(JMath.random()J*J>J)QZn~5~WJkJXJ1JqqJ~R.zZn~5~zJZKhttps5YY~!.comYZKJ!JkJ!JZKYZKJ!JkJ!JZK%3FimageXZKJ!JiQZn~169Zn~1getAttribution5J~J()J7Zn~5~zJZKqaJhrefX'https5YY~!.comYattribution.html'4Place~LqYa4ZKZn~16Zn6)QZnZnL.~ZZ.~QJXJ~J(JoptJ)J7Zn~1~zJnewJL.~Y.~L(Jnull9JoptJ)QZn6ZnZnZn~WJ~jJXJL.~ZZ.~Q(7~9506)QZn~WJ~VJXJL.~ZZ.~Q(7~95106)QZn~WJ~FJXJL.~ZZ.~Q(7~9506)QZn~WJ~NJXJL.~ZZ.~Q(7~95106)QZnZn~WJ~HJXJL.~-(H~j9~VW)QZn~WJ~UJXJL.~-(H~F9~NW)QZnZnYYJstartZnZn~qJXJL.~q('~qid'9J7J~O5JHJ~HWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QZnZn~ZKJXJL.control.~O(7125~H93>5~U6)QZn~ZK.addTo(~q)QZnZn~WJzJXJ~q.~B()QZnZn~q.on('~8'9J~XJ)QZnZn~JJ~X()J7Zn~1~WJ~GJXJ~q.~B()QZn~1ifJ(zJ%2BXXJ~G)J7Zn~5~q.off('~8'9J~X)QZn~5alert(J'~qJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~GJ)QZn~16Zn6ZnZn~ZK.getContainer().classList.add('clickme')K9KhcK5Kleaflet9crossorigin9integrity9sha%3A129script99qlinkJrelXZKstylesheetZKJhrefXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.cssZK~1~JXZK~Q-Rksm%3ARenBE\x22S\x22FjgI3a>1vrjkw>EVPl 3!OiI}%3AvTjIdo%2CbrlAacEu\x22Oi%3B%3AOFh{cOI1bkDwL<dLw3\g0cR AA%3BXXZKJ~ZZXZKZKY4ZnZnJq~XJsrcXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.jsZKJ~JXZK~Q-YNsx%2C%3D>[ebavoBvEBuyp3I{od%3AtA0UzAxs!j%403\x22gC%40PU0kgB>%3Di\x22>Lfe>y>cgBtaR %3BEIFC]!oC%3A0}aPT2L1zwXXZKJ~ZZXZKZK4qY~X4ZnZnJqdivJidXZKmapidZK4qYdiv4K9KcssK5K%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6ZnZn.clickme5beforeJ7Jcontent5JZKclickJmeJ444ZKQJfloat5leftQZnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQZn6K6" );
+  setup_example_anchor( ".hafi-a-leaflet-bug-report", "#o=7KjcK5KlayerControl9tileLayer9function9check_zoom9kitten9TileLayer9baselayerchange9minoom9layer_129var9placekitten9layerGroup9map9return9layer_3>9new_z9layer_39layer_>9layer_29layer_19get%5Coom9layers9coords9\x22itten99~WJ~z9J~ZKQZnZnL.~9.~OJXJL.~9.extend(7Zn~1getTileUrl5J~J(~R)J7Zn~5~WJiJXJMath.ceil(JMath.random()J*J>J)QZn~5~WJkJXJ1JqqJ~R.zZn~5~-JZKhttps5YY~!.comYZKJ!JkJ!JZKYZKJ!JkJ!JZK%3FimageXZKJ!JiQZn~169Zn~1getAttribution5J~J()J7Zn~5~-JZKqaJhrefX'https5YY~!.comYattribution.html'4Place~OqYa4ZKZn~16Zn6)QZnZnL.~ZZ.~XJXJ~J(JoptJ)J7Zn~1~-JnewJL.~9.~O(Jnull9JoptJ)QZn6ZnZnZn~WJ~NJXJL.~ZZ.~X(7~8506)QZn~WJ~FJXJL.~ZZ.~X(7~85106)QZn~WJ~jJXJL.~ZZ.~X(7~8506)QZn~WJ~VJXJL.~ZZ.~X(7~85106)QZnZn~WJ~HJXJL.~q(H~N9~FW)QZn~WJ~UJXJL.~q(H~j9~VW)QZnZnYYJstartZnZn~zJXJL.~z('~zid'9J7J~L5JHJ~HWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QZnZn~ZKJXJL.control.~L(7125~H93>5~U6)QZn~ZK.addTo(~z)QZnZn~WJzJXJ~z.~B()QZnZn~z.on('~Y'9J~QJ)QZnZn~JJ~Q()J7Zn~1~WJ~GJXJ~z.~B()QZn~1ifJ(zJ%2BXXJ~G)J7Zn~5~z.off('~Y'9J~Q)QZn~5alert(J'~zJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~GJ)QZn~16Zn6ZnZn~ZK.getContainer().classList.add('clickme')K9KhcK5Kleaflet9crossorigin9integrity9sha%3A129script99qlinkJrelXZKstylesheetZKJhrefXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.cssZKZn~0~JXZK~Q-Rksm%3ARenBE\x22S\x22FjgI3a>1vrjkw>EVPl%203!OiI%7D%3AvTjIdo%2CbrlAacEu\x22Oi%3B%3AOFh%7BcOI1bkDwL<dLw3%5Cg0cR%20AA%3BXXZKZn~0~ZZXZKZKY4ZnZnJq~XJsrcXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.jsZKJ~JXZK~Q-YNsx%2C%3D>%5BebavoBvEBuyp3I%7Bod%3AtA0UzAxs!j%403\x22gC%40PU0kgB>%3Di\x22>Lfe>y>cgBtaR%20%3BEIFC%5D!oC%3A0%7DaPT2L1zwXXZKJ~ZZXZKZK4qY~X4ZnZnJqdivJidXZKmapidZK4qYdiv4K9KcssK5K%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6ZnZn.clickme5beforeJ7Jcontent5JZKclickJmeJ444ZKQJfloat5leftQZnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQZn6K6" );
       
   function setup_example_anchor( css_sel, href ) {
     document.querySelectorAll( css_sel ).forEach( function ( node ) { node.setAttribute( 'href', '?_' + (Date.now() + Math.random()).toString(16) + href ); } );
@@ -156,7 +151,6 @@
         ,   tajscompil  = w.tajscompil
         ,   htmlcont    = w.htmlcont
         ,   myself      = w.myself
-        ,   myself_code = w.myself_code
 
         // A number from 1 to 36, not too high to have better words compression.
         // Watch out: if you change this value, the whole encoding changes.
@@ -231,8 +225,6 @@
         setInterval( update_jscompil, 678 );
 
         setInterval( store_editor_status, 356 );
-
-        myself_code.innerHTML = myself.textContent;
 
         // Run
 
