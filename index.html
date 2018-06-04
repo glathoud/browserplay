@@ -44,7 +44,7 @@
 
       <script type="text/javascript">
         function load_url_hash( h ) {
-        location.href='?'+Date.now().toString(36)+(/^#/.test(h)?'':'#')+h;
+        location.href='?'+Date.now().toString(36)+'#'+h.substring(/^#/.test(h)?1:0);
         return false;
         }
       </script>
@@ -55,11 +55,7 @@
         &ensp;[<a href="#" onclick="return load_url_hash('#o=76')">clear</a>]
       </div>
       
-      <script type="text/javascript">
-        var show_fun = load_url_hash.bind( null, "#o=7ZjsZ5ZvarJhJXJ'qspanJstyleXKZborder5JsolidJ1pxJblackQJpadding5J2pxQJdisplay5Jinline-blockQKZ4'J!Jtahtml.valueJ!J'qYspan4'QKntahtml.valueJXJ'H'!h!'9'!h!'W'QZ6" );
-      </script>
-
-      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" onclick="return show_fun()">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
+      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" class="hafi-a-fun">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
       
       <hr style="clear: both;"/>
     </div >
@@ -84,14 +80,7 @@
             <p><label for="hfstate">state</label></p>
             <div><textarea id="tastate"></textarea></div>
 
-            <script type="text/javascript">
-              var show_example_with_state = load_url_hash.bind( null, "#o=7ZjcZ5Zspan9padding9display9tmp9replace9border9inline99state!!QKnKnvarJhJXJ'Hq~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK49q~KKJstyleXKZ~95JsolidJ1pxJblackQJ~KZ5J2pxQJ~J5J~Y-blockQKZ4%23qY~KK4W'Kn9JJ~QJXJhKnQKnforJ(varJnJXJstateQJn--QJ)KnJJ~QJXJh.~X(JY%23Yg9J~QJ)QKnKn~QJXJ~Q.~X(Y%23Yg9'')QKnoutcont.inner%5BTMLJXJ~QQKnZ9ZstateZ5Z0Z6" );
-              
-              var show_example_gui_toggle = load_url_hash.bind( null, "#o=7ZhcZ5Zbutton9toggle99q~KKJonclickXKZdocument.body.classList.~KZ('hafi-hidden')KZ4~KZJhashfiddleJGUIJvisibilityqY~KK4Z9ZccZ5Zhafi9hidden99.~KK-~KZ.~KK9J.~KK-~KZJ.~KKJ7Jdisplay5JnoneQJ6KnZ6" );
-              
-              var show_bug_report = load_url_hash.bind( null, "#o=7ZjcZ5ZlayerControl9tileLayer9function9kitten9min\x22oom9TileLayer9layer_129var9placekitten9return9check_zoom9layerGroup9map9new_z9layer_3>9layer_>9layer_39layer_29get\x22oom9layer_19coords9layers9%5Citten99~8J~z9J~KKQKnKnL.~9.~RJXJL.~9.extend(7Kn~1getTileUrl5J~J(~B)J7Kn~5~8JiJXJMath.ceil(JMath.random()J*J>J)QKn~5~8JkJXJ1JqqJ~B.zKn~5~WJKZhttps5YY~H.comYKZJ!JkJ!JKZYKZJ!JkJ!JKZ%3FimageXKZJ!JiQKn~169Kn~1getAttribution5J~J()J7Kn~5~WJKZqaJhrefX'https5YY~H.comYattribution.html'4Place~RqYa4KZKn~16Kn6)QKnKnL.~KZ.~QJXJ~J(JoptJ)J7Kn~1~WJnewJL.~9.~R(Jnull9JoptJ)QKn6KnKnKn~8J~NJXJL.~KZ.~Q(7~X506)QKn~8J~VJXJL.~KZ.~Q(7~X5106)QKn~8J~jJXJL.~KZ.~Q(7~X506)QKn~8J~GJXJL.~KZ.~Q(7~X5106)QKnKn~8J~YJXJL.~q(H~N9~VW)QKn~8J~UJXJL.~q(H~j9~GW)QKnKnYYJstartKnKn~zJXJL.~z('~zid'9J7J~L5JHJ~YWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QKnKn~KKJXJL.control.~L(7125~Y93>5~U6)QKn~KK.addTo(~z)QKnKn~8JzJXJ~z.~F()QKnKn~z.on('baselayerchange'9J~!J)QKnKn~JJ~!()J7Kn~1~8J~-JXJ~z.~F()QKn~1ifJ(zJ%2BXXJ~-)Kn~5alert(J'~zJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~-J)QKn6KnKn~KK.getContainer().classList.add('clickme')Z9ZhcZ5Zleaflet9crossorigin9integrity9sha%3A129script99JqlinkJrelXKZstylesheetKZJhrefXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.cssKZ~1~JXKZ~Q-Rksm%3ARenBE%5CS%5CFjgI3a>1vrjkw>EVPl%203!OiI%7D%3AvTjIdo%2CbrlAacEu%5COi%3B%3AOFh%7BcOI1bkDwL<dLw3\x22g0cR%20AA%3BXXKZJ~KZXKZKZY4KnKnJq~XJsrcXKZhttps5YYunpkg.comY~KK81.3.1YdistY~KK.jsKZJ~JXKZ~Q-YNsx%2C%3D>%5BebavoBvEBuyp3I%7Bod%3AtA0UzAxs!j%403%5CgC%40PU0kgB>%3Di%5C>Lfe>y>cgBtaR%20%3BEIFC%5D!oC%3A0%7DaPT2L1zwXXKZJ~KZXKZKZ4qY~X4KnKnJqdivJidXKZmapidKZ4qYdiv4Z9ZcssZ5Z%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6KnKn.clickme5beforeJ7Jcontent5JKZclickJmeJ444KZQJfloat5leftQKnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQKn6Z6" );
-            </script>
-            <span class="small" style="display: flex; align-items: center;">Examples:&nbsp;<a href="#" onclick="return show_fun()">use html</a>,&nbsp;<a href="#" onclick="show_example_with_state();return false">use state</a>,&nbsp;<a href="#" onclick="return show_example_gui_toggle()">toggle GUI</a>.&emsp;&emsp;&emsp;&emsp;<a href="#" onclick="return show_bug_report()" style="color: transparent">Leaflet bug</a></span>
+            <span class="small" style="display: flex; align-items: center;">Examples:&nbsp;<a href="#" class="hafi-a-fun">use html</a>,&nbsp;<a href="#" class="hafi-a-state">use state</a>,&nbsp;<a href="#" class="hafi-a-gui-toggle">toggle GUI</a>.&emsp;&emsp;&emsp;&emsp;<a href="#" class="hafi-a-leaflet-bug-report" style="color: transparent">Leaflet bug</a></span>
           </div>
         </section>
 
@@ -107,6 +96,26 @@
 
       </div>      
     </div>      
+
+    <script type="text/javascript">
+(function () {
+
+  setup_example_anchor( ".hafi-a-fun", "#o=7KjsK5KvarJhJXJ'qspanJstyleXZKborder5JsolidJ1pxJblackQJpadding5J2pxQJdisplay5Jinline-blockQZK4'J!Jtahtml.valueJ!J'qYspan4'QZntahtml.valueJXJ'H'!h!'9'!h!'W'QK6" );
+
+  setup_example_anchor( ".hafi-a-state", "#o=7KjcK5Kspan9padding9display9tmp9replace9border9inline99state!!QZnZnvarJhJXJ'Hq~ZKJstyleXZK~95JsolidJ1pxJblackQJ~ZZ5J2pxQJ~J5J~Y-blockQZK4%23qY~ZK49q~ZKJstyleXZK~95JsolidJ1pxJblackQJ~ZZ5J2pxQJ~J5J~Y-blockQZK4%23qY~ZK4W'Zn9JJ~QJXJhZnQZnforJ(varJnJXJstateQJn--QJ)ZnJJ~QJXJh.~X(JY%23Yg9J~QJ)QZnZn~QJXJ~Q.~X(Y%23Yg9'')QZnoutcont.inner%5BTMLJXJ~QQZnK9KstateK5K0K6" );
+
+  setup_example_anchor( ".hafi-a-gui-toggle", "#o=7KhcK5Kbutton9toggle99q~ZKJonclickXZKdocument.body.classList.~ZZ('hafi-hidden')ZK4~ZZJhashfiddleJGUIJvisibilityqY~ZK4K9KccK5Khafi9hidden99.~ZK-~ZZ.~ZK9J.~ZK-~ZZJ.~ZKJ7Jdisplay5JnoneQJ6ZnK6" );
+
+  setup_example_anchor( ".hafi-a-leaflet-bug-report", "#o=7KjcK5KlayerControl9tileLayer9function9kitten9min%5Coom9TileLayer9layer_129var9placekitten9return9check_zoom9layerGroup9map9new_z9layer_3>9layer_>9layer_39layer_29get%5Coom9layer_19coords9layers9\x22itten99~8J~z9J~ZKQZnZnL.~9.~RJXJL.~9.extend(7Zn~1getTileUrl5J~J(~B)J7Zn~5~8JiJXJMath.ceil(JMath.random()J*J>J)QZn~5~8JkJXJ1JqqJ~B.zZn~5~WJZKhttps5YY~H.comYZKJ!JkJ!JZKYZKJ!JkJ!JZK%3FimageXZKJ!JiQZn~169Zn~1getAttribution5J~J()J7Zn~5~WJZKqaJhrefX'https5YY~H.comYattribution.html'4Place~RqYa4ZKZn~16Zn6)QZnZnL.~ZZ.~QJXJ~J(JoptJ)J7Zn~1~WJnewJL.~9.~R(Jnull9JoptJ)QZn6ZnZnZn~8J~NJXJL.~ZZ.~Q(7~X506)QZn~8J~VJXJL.~ZZ.~Q(7~X5106)QZn~8J~jJXJL.~ZZ.~Q(7~X506)QZn~8J~GJXJL.~ZZ.~Q(7~X5106)QZnZn~8J~YJXJL.~q(H~N9~VW)QZn~8J~UJXJL.~q(H~j9~GW)QZnZnYYJstartZnZn~zJXJL.~z('~zid'9J7J~L5JHJ~YWJ6).setView(H%3A1.%3A0%3A9J-0.0%2CW9J%3A)QZnZn~ZKJXJL.control.~L(7125~Y93>5~U6)QZn~ZK.addTo(~z)QZnZn~8JzJXJ~z.~F()QZnZn~z.on('baselayerchange'9J~!J)QZnZn~JJ~!()J7Zn~1~8J~-JXJ~z.~F()QZn~1ifJ(zJ%2BXXJ~-)Zn~5alert(J'~zJzoomJchangedJfromJ'J!JzJ!J'JtoJ'J!J~-J)QZn6ZnZn~ZK.getContainer().classList.add('clickme')K9KhcK5Kleaflet9crossorigin9integrity9sha%3A129script99qlinkJrelXZKstylesheetZKJhrefXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.cssZK~1~JXZK~Q-Rksm%3ARenBE\x22S\x22FjgI3a>1vrjkw>EVPl%203!OiI%7D%3AvTjIdo%2CbrlAacEu\x22Oi%3B%3AOFh%7BcOI1bkDwL<dLw3%5Cg0cR%20AA%3BXXZKJ~ZZXZKZKY4ZnZnJq~XJsrcXZKhttps5YYunpkg.comY~ZK81.3.1YdistY~ZK.jsZKJ~JXZK~Q-YNsx%2C%3D>%5BebavoBvEBuyp3I%7Bod%3AtA0UzAxs!j%403\x22gC%40PU0kgB>%3Di\x22>Lfe>y>cgBtaR%20%3BEIFC%5D!oC%3A0%7DaPT2L1zwXXZKJ~ZZXZKZK4qY~X4ZnZnJqdivJidXZKmapidZK4qYdiv4K9KcssK5K%23mapidJ7Jheight5J>00pxQJwidth5J100%25QJ6ZnZn.clickme5beforeJ7Jcontent5JZKclickJmeJ444ZKQJfloat5leftQZnmargin-left5J-100%25QJbackground-color5JwhiteQJpadding5J0.33emQJborder-radius5J0.33emQZn6K6" );
+      
+  function setup_example_anchor( css_sel, href ) {
+    document.querySelectorAll( css_sel ).forEach( function ( node ) { node.setAttribute( 'href', '?_' + (Date.now() + Math.random()).toString(16) + href ); } );
+  }
+
+})();
+    </script>
+
+
 
     <script type="text/javascript" id="myself">
     /*
@@ -155,13 +164,15 @@
 
         ,   map_swap
         ,     c_swap
+
+        ,   HASH_RX = /([#&]o=)([^&]+)/
         ;
 
         prepare_mappings();
         
         // Read
         
-        var h = (location.hash.match( /[#&]o=([^&]+)/ )  ||  [])[ 1 ]
+        var h = (location.hash.match( HASH_RX )  ||  [])[ 2 ]
         , o
         ;
         try { o = h  &&  JSON.parse( map_swap( decodeURIComponent( h ) ) ); }
@@ -206,7 +217,9 @@
         tmp.querySelectorAll( 'script' ).forEach( function (s) {
             document.write( s.outerHTML );
         } );
-        
+
+        read_editor_status();
+
         // Write
 
         setInterval( update_html, 250 );
@@ -216,7 +229,9 @@
         setInterval( update_hash, 250 );
 
         setInterval( update_jscompil, 678 );
-        
+
+        setInterval( store_editor_status, 356 );
+
         myself_code.innerHTML = myself.textContent;
 
         // Run
@@ -281,9 +296,14 @@
                 }
                                 
                 var json = JSON.stringify( o )
-                ,  new_h = '#o=' + encodeURIComponent( map_swap( json ) )
+                ,  old_h = location.hash  ||  '#'
                 ;
-                if (new_h !== location.hash)
+                if (!HASH_RX.test( old_h ))
+                    old_h += (old_h.length > 1  ?  '&'  :  '') + 'o=_';
+
+                HASH_RX.test( old_h )  ||  null.bug;
+                var new_h = old_h.replace( HASH_RX, '$1' + encodeURIComponent( map_swap( json ) ) );
+                if (new_h !== old_h)
                     location.hash = new_h;
             }
         }
@@ -320,7 +340,101 @@
             ;
         }
 
+
+
+        function read_editor_status()
+        {
+            var storage = editor_storage()
+            ,   hf = storage  &&  storage.hashfiddle
+            ,   hfo
+            ;
+            try { hfo = hf  &&  JSON.parse( hf ); } catch (e) { delete storage.hashfiddle; hfo = null; }
+
+            var act = hfo  &&  hfo.active
+            ,   id = act  &&  act.id
+            , node = id  &&  document.getElementById( id )
+            ,   ch = hfo  &&  hfo.ch
+            ;
+            if (node)
+            {
+                node.focus();
+                var s0 = act.s0
+                ,   s1 = act.s1
+                ;
+                if (s0 != null)   node.selectionStart = s0;
+                if (s1 != null)   node.selectionEnd   = s1;
+            }
+            if (ch)
+            {
+                for (var id in ch)
+                {
+                    var node = document.getElementById( id );
+                    if (node)
+                        node.checked = !!ch[ id ];
+                }
+            }
+
+        }
+
+        function store_editor_status()
+        {
+            var storage = editor_storage();
+            if (storage)
+            {
+                var daE = document.activeElement
+                ,    id = daE  &&  /^textarea$/i.test( daE.tagName )  &&  daE.id
+                ,    s0 = id  &&  daE.selectionStart
+                ,    s1 = id  &&  daE.selectionEnd
+                ,    ch = {}
+                ;
+                [].forEach.call(document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
+                                ,function (x) { var id = x.id; if (id) { ch[ id ] = !!x.checked; } }
+                               );
+                var to_store = { active : id  &&  { id : id, s0 : s0, s1 : s1 } ||  null
+                                 , ch : ch
+                               };
+                storage.hashfiddle = JSON.stringify( to_store );
+            }
+        }
+
         // --- Further details
+
+        var _storage_supported, _storage;
+        function editor_storage( candidate_arr )
+        {
+            if (_storage_supported != null)
+                return _storage_supported  &&  _storage;
+
+            if (!candidate_arr)
+            {
+                return editor_storage( [ window.localStorage
+                                         , window.sessionStorage
+                                       ] );
+            }
+
+            if (candidate_arr.length < 1)
+                return (_storage_supported = false);
+            
+            var candidate = candidate_arr.shift();
+            try
+            {
+                delete candidate._xxx_test_hafi
+                candidate._xxx_test_hafi = '123';
+                if (candidate._xxx_test_hafi === '123')
+                {
+                    delete candidate._xxx_test_hafi;
+                    _storage_supported = true;
+                    return (_storage = candidate);
+                }
+            }
+            catch( e )
+            {
+                
+            }
+
+            return editor_storage( candidate_arr );
+        }
+
 
         var _special_code
         ,   _special
@@ -359,13 +473,18 @@
                     .push( { code : c, v : v } )
                 ;
             }
-            arr1.sort( function ( a, b ) { return a.v-b.v; } );
-            arr2.sort( function ( a, b ) { return b.v-a.v; } );
 
+            // impl. note: `a.code-b.code` necessary to fully determine sort order
+            // (otherwise cross-browser differences)
+            arr1.sort( function ( a, b ) { return a.v-b.v  ||  a.code-b.code; } );  
+            arr2.sort( function ( a, b ) { return b.v-a.v  ||  a.code-b.code; } );
+            
             // We'll use `_special_code` to compress spaces.
             _special_code = arr1.shift().code;
             _special = String.fromCharCode( _special_code );
 
+            // console.log('_special_code:',_special_code,', arr1:', arr1, ', arr2:', arr2);
+            
             var o_swap = {};
             c_swap = {};
             for (var i = 0, ni = Math.min( arr1.length, arr2.length );
