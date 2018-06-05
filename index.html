@@ -220,7 +220,11 @@
 
         setInterval( update_css, 250 );
 
-        setInterval( update_hash, 250 );
+        document.addEventListener( 'keypress', hash_remember_last_keypress );
+        document.addEventListener( 'mouseover', hash_remember_doc_mouseover );
+        document.addEventListener( 'mouseleave', hash_remember_doc_mouseleave );
+        window.addEventListener( 'popstate', hash_detect_user_browsing_history );
+        setInterval( update_hash, 421 );
 
         setInterval( update_jscompil, 678 );
 
@@ -255,9 +259,43 @@
         ,   _last_html_hash
         ,   _last_css_hash
         ,   _last_state_hash
+
+        ,   _last_keypress
+        ,   _last_doc_mouseout
+
+        ,   _last_h_part
         ;
+
+        function hash_remember_last_keypress()
+        {
+            _last_keypress = Date.now();
+        }
+
+        function hash_remember_doc_mouseover()
+        {
+            _last_doc_mouseout = false;
+        }
+
+        function hash_remember_doc_mouseleave()
+        {
+            _last_doc_mouseout = true;
+        }
+
+        function hash_detect_user_browsing_history()
+        // Convenience: automatic reload when browser history changed by the
+        // user.
+        {
+            var mo = _last_doc_mouseout !== false  &&  _last_h_part  &&  (HASH_RX.exec( location.hash )  ||  ['']);
+            if (mo  &&  mo[ 0 ].substring(1) !== 'o=' + _last_h_part)
+                location.reload();  
+        }
+
         function update_hash()
         {
+            // Not the first time  &&  user currently typing
+            if (_last_js_hash != null  &&  500 > Date.now() - _last_keypress)
+                return;   // This way the browser history GUI remains somewhat usable
+    
             var  js = tajs  .value
             ,  html = tahtml.value
             ,   css = tacss .value
@@ -293,10 +331,30 @@
                 if (!HASH_RX.test( old_h ))
                     old_h += (old_h.length > 1  ?  '&'  :  '') + 'o=_';
 
+                _last_h_part = encodeURIComponent( map_swap( json ) );
+                
                 HASH_RX.test( old_h )  ||  null.bug;
-                var new_h = old_h.replace( HASH_RX, '$1' + encodeURIComponent( map_swap( json ) ) );
+                var new_h = old_h.replace( HASH_RX, '$1' + _last_h_part );
+
+                // Update the hash... but not too often, so that the
+                // browser history GUI remains somewhat usable.
                 if (new_h !== old_h)
                     location.hash = new_h;
+                
+                // Also make the browser history GUI slightly more expressive
+
+                document.title = [ htmlcont.textContent
+                                   , outcont.textContent
+                                   , tajs.value
+                                   , tahtml.value
+                                   , tacss.value
+                                   , tastate.value
+                                 ]
+                    .filter( function ( x ) { return x; } )
+                    .map( function ( x ) { return x.length < 33  ?  x  :  x.substring( 0, 30 ) + '...' } )
+                    .join( ' | ' )
+                    ||  'Hashfiddle'
+                ;
             }
         }
 
