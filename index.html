@@ -157,13 +157,17 @@
         ,   SPACE_N = 8
 
         ,   map_swap
-        ,     c_swap
 
         ,   HASH_RX = /([#&]o=)([^&]+)/
         ;
 
         prepare_mappings();
-        
+
+        function compress_name_arr_js()     { return [ 'js',    'jc', 'j2', 'j3' ]; }
+        function compress_name_arr_html()   { return [ 'html',  'hc', 'h2', 'h3' ]; }
+        function compress_name_arr_css()    { return [ 'css',   'cc', 'c2', 'c3' ]; }
+        function compress_name_arr_state()  { return [ 'state', 'sc', 's2', 's3' ]; }
+                
         // Read
         
         var h = (location.hash.match( HASH_RX )  ||  [])[ 2 ]
@@ -171,20 +175,11 @@
         ;
         try { o = h  &&  JSON.parse( map_swap( decodeURIComponent( h ) ) ); }
         catch (e) { o = {}; }
-        var html  = maybe_decompress( o, 'html', 'hc' )
-        ,   css   = maybe_decompress( o, 'css', 'cc' )
-        ,   state = maybe_decompress( o, 'state', 'sc' )
-        ,   js    = maybe_decompress( o, 'js', 'jc' )
-        ;
-        function maybe_decompress( o, a, b )
-        {
-            var tmp;
-            return !o  ?  ''  :
-                (tmp = o[ a ])  &&  tmp
-                || (tmp = o[ b ])  &&  decompress( o[ b ] )
-                ||  ''
-            ;
-        }
+        var js    = maybe_decompress( o, compress_name_arr_js() )
+        ,   html  = maybe_decompress( o, compress_name_arr_html() )
+        ,   css   = maybe_decompress( o, compress_name_arr_css() )
+        ,   state = maybe_decompress( o, compress_name_arr_state() )
+        ;       
         tahtml.value = html;
         tacss.value = css;
         tastate.value = state;
@@ -236,6 +231,8 @@
         update_css();
         
         document.write( '\x3Cscript type="text/javascript"\x3E' + js_with_state( js, state ) + '\x3C/script\x3E' );
+
+        update_hash();  // In case the user is "iterating" by pressing F5 very soon.
 
         // --- Details
 
@@ -309,22 +306,11 @@
                 _last_state_hash = state;
 
                 var o = {};
-                maybe_compress( o, 'js', 'jc', js );
-                maybe_compress( o, 'html', 'hc', html );
-                maybe_compress( o, 'css', 'cc', css );
-                maybe_compress( o, 'state', 'sc', state );
-                function maybe_compress( o, a, b, data )
-                {
-                    if (data.length)
-                    {
-                        var dc = compress( data );
-                        if (dc.length < data.length)
-                            o[ b ] = dc;
-                        else
-                            o[ a ] = data;
-                    }
-                }
-                                
+                maybe_compress( o, compress_name_arr_js(),    js );
+                maybe_compress( o, compress_name_arr_html(),  html );
+                maybe_compress( o, compress_name_arr_css(),   css );
+                maybe_compress( o, compress_name_arr_state(), state );
+
                 var json = JSON.stringify( o )
                 ,  old_h = location.hash  ||  '#'
                 ;
@@ -483,11 +469,11 @@
             var candidate = candidate_arr.shift();
             try
             {
-                delete candidate._xxx_test_hafi
-                candidate._xxx_test_hafi = '123';
-                if (candidate._xxx_test_hafi === '123')
+                delete candidate.__test_hafi__
+                candidate.__test_hafi__ = '123';
+                if (candidate.__test_hafi__ === '123')
                 {
-                    delete candidate._xxx_test_hafi;
+                    delete candidate.__test_hafi__;
                     _storage_supported = true;
                     return (_storage = candidate);
                 }
@@ -505,6 +491,8 @@
         ,   _special
         ,   _free1arr
         ,   _free1n
+        ,   _sarr1
+        ,   _sarr1n
         ;
         function prepare_mappings()
         {
@@ -535,7 +523,7 @@
                 ,   s = String.fromCharCode( c )
                 ;
                 (s === encodeURIComponent( s )  ?  arr1  :  arr2)
-                    .push( { code : c, v : v } )
+                    .push( { code : c, v : v, s : s } )
                 ;
             }
 
@@ -548,10 +536,12 @@
             _special_code = arr1.shift().code;
             _special = String.fromCharCode( _special_code );
 
+            _sarr1  = arr1.map( function (x) { return x.s; } );
+            _sarr1n = _sarr1.length;
+            
             // console.log('_special_code:',_special_code,', arr1:', arr1, ', arr2:', arr2);
             
             var o_swap = {};
-            c_swap = {};
             for (var i = 0, ni = Math.min( arr1.length, arr2.length );
                  i < ni; ++i)
             {
@@ -566,12 +556,6 @@
                 ;
                 o_swap[ code2 ] = code1;
                 o_swap[ code1 ] = code2;
-
-                var char1 = String.fromCharCode( code1 )
-                ,   char2 = String.fromCharCode( code2 )
-                ;
-                c_swap[ char1 ] = char2;
-                c_swap[ char2 ] = char1;
             }
             map_swap = mapperGen( o_swap );
 
@@ -594,90 +578,293 @@
                 return mapper;
                 function mapper( s )
                 {
-                    var n = s.length
-                    , arr = new Array( n )
+                    var      n = s.length
+                    , is_short = n < 20
+                    ,      ret = is_short  &&  mapper[ s ]
                     ;
-                    for (var i = 0; i < n; ++i)
+                    if (!ret)
                     {
-                        var code_in = s.charCodeAt( i )
-                        ,   tmp     = o[ code_in ]
-                        ;
-                        arr[ i ]    = tmp != null  ?  tmp  :  code_in;
+                        var arr = new Array( n );
+                        for (var i = 0; i < n; ++i)
+                        {
+                            var code_in = s.charCodeAt( i )
+                            ,   tmp     = o[ code_in ]
+                            ;
+                            arr[ i ]    = tmp != null  ?  tmp  :  code_in;
+                        }
+                        ret = sFromCharCode( arr );
+
+                        if (is_short)
+                            mapper[ s ] = ret;
                     }
-                    return String.fromCharCode.apply( String, arr );  // Hopefully won't reach the engine limit here
+                    return ret;
                 }
             }
         }
 
-        function compress( js )
+        
+        function maybe_compress( o, name_arr, data_0 )
         {
+            if (data_0.length > 0)
+            {
+                // no compression
+                var best_comp = name_arr[ 0 ] 
+                ,   best_data = data_0
+                ;
+                for (var i = name_arr.length; --i;)  // i>0
+                {
+                    // some compression (depends on i, where i>0)
+
+                    var comp = name_arr[ i ]
+                    ,   data = compress( data_0, i )
+                    ;
+                    if (comp.length + data.length < best_comp.length + best_data.length)
+                    {
+                        // pick the shortest one
+                        best_comp = comp;
+                        best_data = data;
+                    }
+                }
+
+                o[ best_comp ] = best_data;
+            }
+        }
+        
+        function maybe_decompress( o, name_arr )
+        {
+            if (o)
+            {
+                for (var i = name_arr.length; i--;)
+                {
+                    var tmp = o[ name_arr[ i ] ];
+                    if (tmp)
+                    {
+                        return i < 1
+                            ?  tmp                    // no compression
+                            :  decompress( tmp, i )   // some compression
+                        ;
+                    }
+                }
+            }
+            
+            return '';
+        }
+
+        
+        function compress( /*string*/js, /*number of characters after the `_special` character*/nc )
+        {
+            js.substring.call.a;
+            nc > 0  &&  nc === nc | 0  && nc.toPrecision.call.a;
+
+            var nmax = nmax_of_nc[ nc ]  ||  nmax_of_nc( nc );
+            
             var n_of_w = {};
-            (js.match( /\b\w+\b/g )  ||  [])
-                .forEach( function (w) { if (w.length > 2) n_of_w[ w ] = 1 + (n_of_w[ w ]  ||  0); } )
-            ;
-            var wa = Object.keys( n_of_w ).map( function (w) {
-                var n = n_of_w[ w ];
-                return { w : w, n : n, gain : n * (w.length - 2) - /*the head list cost:*/(w.length + 1) };
+
+            // Performance note: this part ran faster in Chrome
+            // using `forEach` as compared to inline code (2018-06).
+            (js.match( /\b\w+\b/g )  ||  []).forEach( function (w) {
+                if (w.length > 2)
+                    n_of_w[ w ] = 1 + (n_of_w[ w ] | 0);
             });
-            wa = wa
-                .filter( function (o) { return o.gain > 0; })
-                .sort( function (a,b) { return b.gain - a.gain; } )
-                .slice( 0, _free1n )
+            
+
+            // Performance note: this part ran faster as inline code,
+            // as compared to map/filter chains (Chrome, 2018-06).
+            var wa = [];
+            for (var w in Object.keys( n_of_w ))
+            {
+                var  n = n_of_w[ w ]
+                , gain = n * (w.length - (1+nc)) - /*the head list cost:*/(w.length + 1)
+                ;
+                if (gain > 0)
+                    wa.push( { w : w, n : n, gain : gain } );
+
+                if (wa.length === nmax)
+                    break;
+            }
+            wa.sort( function (a,b) { return b.gain - a.gain; } );
+
+            var wa_n = wa.length;
+            
+            var s_of_w = {}
+            ,   w_arr  = new Array( wa_n )
             ;
-            var c_of_w = {};
-            wa.forEach( function (o, i) { c_of_w[ o.w ] = _free1arr[ i ] } );
+            for (var i = wa.length; i--;)
+            {
+                var o = wa[ i ]
+                ,   w = w_arr[ i ] = o.w
+                ;
+                s_of_w[ w ] = word_code( nc, i );
+            }
+            
+            var word_regexp = wa.length
+                &&  new RegExp( w_arr.join( '|' ), 'g' );
+            
+            var head = w_arr.join(',') + ',,'
 
-            var word_regexp = wa.length  &&  new RegExp(
-                wa.map( function (o) { return o.w; } ).join( '|' )
-                , 'g'
-            );
-
-            var head = wa.map( function (o) { return o.w; } ).join(',') + ',,'
             ,   body = js
                 .replace( new RegExp( '\\' + _special, 'g' ), _special + _special )
                 .replace( new RegExp( ' {3,' + (2 + SPACE_N) + '}', 'g' ), cfs )
             ;
             if (wa.length > 0)
                 body = body.replace( word_regexp, cfw );
-            
+
             return head + body;
+
+            // Implementation note: we pre-swap here, so that after
+            // the final swap, each character in the URL will be the
+            // desired ones == no ugly %XX encoding == only 1 char.
+            //
+            // Additionally we try the cache first `map_swap[ tmp ]`
+            // for better performance.
             
             function cfw( w )
             {
-                var tmp = c_of_w[ w ];
-                tmp.length === 1  ||  null.bug;
-                return _special + map_swap( c_of_w[ w ] );  // (c_swap[ tmp ]  ||  tmp);  // faster than map_swap for a single char
+                var tmp = s_of_w[ w ];
+                return _special + (map_swap[ tmp ]  ||  map_swap( tmp ));
             }
             
             function cfs( s )
             {
-                return _special + map_swap( (s.length - 3).toString( SPACE_N ) );
+                var tmp = (s.length - 3).toString( SPACE_N );
+                return _special + (map_swap[ tmp ]  ||  map_swap( tmp ));
             }
         }
 
-        function decompress( js )
+        function decompress( /*string*/js, /*number*/nc )
         {
+            js.substring.call.a;
+            nc > 0  &&  nc === nc | 0  && nc.toPrecision.call.a;
+
             var head = js.match( /^(.*?),,/ )[ 1 ]
             ,   body = js.substring( 2 + head.length )
 
-            ,   wa = head.split( ',' )
-            , w_of_c = {}
+            ,     wa = head.split( ',' )
+            , w_of_s = {}
             ;
-            wa.forEach( function (w,i) { w_of_c[ _free1arr[ i ] ] = w } );
+            wa.forEach( function (w,i) {
+                w_of_s[ word_code( nc, i ) ] = w;
+            } );
 
-            return body.replace( new RegExp( '\\' + _special + '(.)', 'g' )
-                                 , df
-                               );
+            // Implementation note: we need to swap again because of
+            // the pre-swap done in `compress()`, see above.
+            //
+            // Additionally we try the cache first `map_swap[ tmp ]`
+            // for better performance.
+            
+            var rx_space_part = Array.apply( null, { length : SPACE_N } )
+                .map( function( _, i ) {
+                    var tmp = i.toString( SPACE_N );
+                    return map_swap[ tmp ]  ||  map_swap( tmp );
+                } )
+                .join( '' )
+
+            ,   rx_str = '\\' + _special + '('
+                + '[' + rx_space_part + ']' 
+                + '|[^\\' + _special + rx_space_part + ']' + (nc < 2  ?  ''  :  '(?:[^\\' + _special + ']{' + (nc-1) + ',' + (nc-1) + '})')
+                + ')'
+
+            ,   rx = new RegExp( rx_str, 'g' )
+            ;
+            return body.replace( rx, df );
 
             function df( a, b_0 )
             {
-                b_0.length === 1  ||  null.bug;
-                var b = map_swap( b_0 );
-                return b === _special  ?  a
-                    :  b in w_of_c  ?  w_of_c[ b ]
-                    :  ' '.repeat( 3 + parseInt( b, SPACE_N ) );
+                var b = map_swap[ b_0 ]  ||  map_swap( b_0 );
+                
+                var n = b.length;
+                n === 1  ||  n === nc  ||  null.bug;
+
+                return b in w_of_s     ?  w_of_s[ b ]
+                    :  n !== 1         ?  null.bug
+                    :  b === _special  ?  a
+                    :  ' '.repeat( 3 + parseInt( b, SPACE_N ) )
+                ;
             }
         }
+
+        
+        function word_code(
+            /*integer (number of characters after the `_special` characters)*/nc
+            , /*number*/i_0 )
+        {
+            var cache = word_code[ nc ]  ||  (word_code[ nc ] = [])
+            ,   ret   = cache[ i_0 ]
+            ;
+            if (!ret)
+            {            
+                var dim_arr = dim_arr_of_nc[ nc ]  ||  dim_arr_of_nc( nc );
+                
+                for (var k = dim_arr.length, tmp = new Array( k ), i = i_0;
+                     k--;)
+                {
+                    var  dim = dim_arr[ k ]
+                    ,  c_arr =
+                        dim === _free1n  ?  _free1arr
+                        :  dim === _sarr1n  ?  _sarr1
+                        :  null.bug
+                    ;
+                    c_arr.length === dim  ||  null.bug;
+
+                    tmp[ k ] = c_arr[ i % dim ];
+                    i = (i / dim) | 0;
+                }
+                
+                i === 0  ||  null.bug;
+                tmp.length === nc  ||  null.bug;
+
+                ret = cache[ i_0 ] = tmp.join( '' );
+            }
+            ret.length === nc  ||  null.bug;
+            return ret;
+        }
+
+        
+        function nmax_of_nc( /*integer (number of characters after the `_special` characters)*/nc )
+        {
+            return nmax_of_nc[ nc ]  ||  (nmax_of_nc[ nc ] = dim_arr_of_nc( nc ).nmax);
+        }
+            
+        function dim_arr_of_nc( /*integer (number of characters after the `_special` characters)*/nc )
+        {
+            var ret = dim_arr_of_nc[ nc ];
+            if (!ret)
+            {
+                ret = dim_arr_of_nc[ nc ] =
+                    Array
+                    .apply( null, { length: nc } )
+                    .map( function ( _, i ) { return i < 1  ?  _free1n  :  _sarr1n; } )
+                
+                ret.nmax = ret.reduce( function ( a, b ) { return a*b; } );
+            }
+            return ret;                
+        }
+        
+
+
+        function sFromCharCode( /*array of integer*/arr )
+        {
+            // Summary: should be safe with big arrays
+            // Loosely inspired by http://webreflection.blogspot.com/2011/07/about-javascript-apply-arguments-limit.html
+            
+            var n   = arr.length
+            , p     = 20000
+            , s_arr = []
+            ;
+            if (arr.subarray) // TypedArray
+            {
+                for (var i = 0; i < n; i += p)
+                    s_arr.push( String.fromCharCode.apply( String, arr.subarray( i, i + p ) ) );
+            }
+            else
+            {
+                for (var i = 0; i < n; i += p)
+                    s_arr.push( String.fromCharCode.apply( String, arr.slice( i, i + p ) ) );
+            }
+            
+            return s_arr.join('');
+        }
+
         
     })();
     </script>
