@@ -611,7 +611,8 @@
                 var best_comp = name_arr[ 0 ] 
                 ,   best_data = data_0
                 ;
-                for (var i = name_arr.length; --i;)  // i>0
+                for (var i = 1, i_end = name_arr.length;
+                     i < i_end; ++i)
                 {
                     // some compression (depends on i, where i>0)
 
