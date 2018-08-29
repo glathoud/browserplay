@@ -8,14 +8,9 @@
       font-family: helvetica; 
       font-family: Verdana,Arial,'Lucida Grande',Sans-Serif;
       }
+
+
       .hafi section { border: solid 1px black; padding: 1em; margin: 0.2em; background-color: lightgrey; }
-      @media screen and (min-width: 1000px) {
-      .hafi .small { font-size: small; }
-      .hafi section.half { width: calc(50% - 3em); }
-      .hafi .left { float: left; }
-      .hafi .right { float: right; }
-      .hafi .clear { clear: both; }
-      }
       .hafi .top-right { position: fixed; top: 0; right: 0; margin: 0; z-index: 99999; padding: 0.5em; background-color: white; opacity: 0.9; border-radius: 0 0 0 0.33em; }
       .hafi .lglh { height: 1.4em; }
       .hafi textarea { width: 100%; min-height: 300px; }
@@ -34,6 +29,21 @@
       .hafi .hftabcont>input[type="radio"] { position: absolute; left: -9999px; visibility: hidden; display: none; }
       .hafi .hftabcont>input[type="radio"]:checked+p label { text-decoration: underline; font-weight: bold; }
       .hafi .hftabcont>input[type="radio"]:checked+p+div { display: block; width: 100%; }
+
+      @media screen and (max-width: 999px) {
+      body { font-size: 1.4em; }
+      pre, button { font-size: 1.6em; }
+      .hafi { width: calc( 100% - 4em ); }
+      .hafi textarea { min-height: 450px; }
+      }
+      @media screen and (min-width: 1000px) {
+      .hafi .small { font-size: small; }
+      .hafi section.half { width: calc(50% - 3em); }
+      .hafi .left { float: left; }
+      .hafi .right { float: right; }
+      .hafi .clear { clear: both; }
+      }
+
     </style>
   </head>
   <body>
@@ -55,7 +65,7 @@
         &ensp;[<a href="#" onclick="return load_url_hash('#o=76')">clear</a>]
       </div>
       
-      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" class="hafi-a-fun">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By <a href="http://glat.info">G. Lathoud</a>, May 2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
+      <span>Minimalistic "web fiddler" that saves everything to the URL hash. <a href="#" class="hafi-a-fun">Fun</a> within <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">limits</a>. Inspired from Cesium's <a href="https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/" target="_blank">Sandcastle</a> &amp; <a href="https://jsfiddle.net" target="_blank">JSFiddle</a>. By&nbsp;<a href="http://glat.info">G.&nbsp;Lathoud</a>, May&nbsp;2018. GitHub&nbsp;<a href="https://github.com/glathoud/hashfiddle" target="_blank">source</a>.</span>
       
       <hr style="clear: both;"/>
     </div >
